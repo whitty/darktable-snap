@@ -33,7 +33,7 @@ parts:
   lensfun:
     plugin: cmake
     source: https://github.com/lensfun/lensfun.git
-    source-commit: v0.3.2
+    source-commit: v0.3.95
     configflags:
       - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_INSTALL_PREFIX=/usr
@@ -47,9 +47,9 @@ parts:
     override-build: |
       snapcraftctl build
       # run lensfun-update-data and update lens data
-      PYTHONPATH=/usr/lib/python3.6/site-packages/ lensfun-update-data
-      mv -v /var/lib/lensfun-updates/version_1/*.xml ${SNAPCRAFT_PART_INSTALL}/usr/share/lensfun/version_1
-      rm -rf /var/lib/lensfun-updates/version_1
+      PYTHONPATH=${SNAPCRAFT_PART_INSTALL}/usr/lib/python3.6/site-packages/ lensfun-update-data || true
+      mv -v /var/lib/lensfun-updates/version_2/*.xml ${SNAPCRAFT_PART_INSTALL}/usr/share/lensfun/version_2
+      rm -rf /var/lib/lensfun-updates/version_2
 
   darktable:
     plugin: cmake
